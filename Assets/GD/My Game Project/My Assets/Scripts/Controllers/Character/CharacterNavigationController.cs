@@ -15,10 +15,10 @@ namespace GD.Controllers
 {
     public class CharacterNavigationController : MonoBehaviour
     {
-        [Header("Selection & Waypoint")]
-        [SerializeField]
-        [Tooltip("Set the game object used to indicate that the character using this controller is currently selected.")]
-        private GameObject selectionMarker;
+        // [Header("Selection & Waypoint")]
+        // [SerializeField]
+        // [Tooltip("Set the game object used to indicate that the character using this controller is currently selected.")]
+        // private GameObject selectionMarker;
 
         [SerializeField]
         [Tooltip("Set the game object used to indicate a waypoint for the character using this controller for navigation.")]
@@ -28,11 +28,7 @@ namespace GD.Controllers
         [Tooltip("Used by the waypoint when the character is moving. Can be simple empty object.")]
         private GameObject sceneAnchor;
 
-        //[Header("Selected Object")]
-        //[SerializeField]
-        //[Tooltip("A scriptable object which holds a reference to the currently selected character")]
-        //private GameObjectVariable currentlySelectedGameObject;
-
+        
         [Header("Current State")]
         [SerializeField]
         [ReadOnly]
@@ -41,15 +37,12 @@ namespace GD.Controllers
         private Animator animator;
         private NavMeshAgent navMeshAgent;
         private IRayProvider rayProvider;
-        //private ISelector selector;
         private RaycastHit hitInfo;
-        //private bool isSelected;
 
         private void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             rayProvider = GetComponent<IRayProvider>();
-            // selector = GetComponent<ISelector>();
             animator = GetComponent<Animator>();
         }
 
@@ -59,6 +52,7 @@ namespace GD.Controllers
         /// Sets navmesh target
         /// </summary>
         /// <param name="target"></param>
+        
         private void SetDestination(Vector3 target)
         {
             navMeshAgent.SetDestination(target);
@@ -95,10 +89,12 @@ namespace GD.Controllers
             waypointMarker.transform.position = navMeshAgent.destination;
             waypointMarker.transform.SetParent(sceneAnchor.transform);
         }
-
+/*
         /// <summary>
         /// Disable waypoint indicator and set waypoint transform back to attached player
         /// </summary>
+        
+        */
         private void ClearWaypoint()
         {
             waypointMarker.SetActive(false);
@@ -115,11 +111,11 @@ namespace GD.Controllers
             this.isSelected = isSelected;
             selectionMarker.SetActive(isSelected);
         }
-    
+    */
         #endregion Actions -  Set/Clear destination and waypoint
 
         #region NEW INPUT - Selection
-       
+       /*
          ///// <summary>
          ///// Called when a player selects the on-screen player avatar
         ///// </summary>
@@ -148,7 +144,7 @@ namespace GD.Controllers
          ///// Called when player selects a destination point on the navmesh
          ///// </summary>
          ///// <param name="context"></param>
-         public void OnSelectWaypoint(InputAction.CallbackContext context)
+    /*    public void OnSelectWaypoint(InputAction.CallbackContext context)
          {
              //if a player is selected then determine destination
              //if (isSelected)
@@ -169,7 +165,7 @@ namespace GD.Controllers
                  animator.SetBool("IsWalking", isWalking);
              }
          }
-
+*/
         #endregion NEW INPUT - Selection
 
         #region OLD INPUT - Selection
@@ -186,10 +182,10 @@ namespace GD.Controllers
             SetSelected(true);
             currentlySelectedGameObject.Value = gameObject;
         }
-
+*/
         private void Update()
         {
-            if (Input.GetMouseButtonDown(1) && isSelected)
+            if (Input.GetMouseButtonDown(1))
             {
                 ClickDestination();
             }
@@ -200,7 +196,7 @@ namespace GD.Controllers
                 animator.SetBool("IsWalking", false);
             }
         }
-*/
+
         #endregion OLD INPUT - Selection
     }
 }
