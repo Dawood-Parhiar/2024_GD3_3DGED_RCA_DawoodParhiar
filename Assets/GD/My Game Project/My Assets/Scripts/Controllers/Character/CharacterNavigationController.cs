@@ -28,10 +28,10 @@ namespace GD.Controllers
         [Tooltip("Used by the waypoint when the character is moving. Can be simple empty object.")]
         private GameObject sceneAnchor;
 
-        [Header("Selected Object")]
-        [SerializeField]
-        [Tooltip("A scriptable object which holds a reference to the currently selected character")]
-        private GameObjectVariable currentlySelectedGameObject;
+        //[Header("Selected Object")]
+        //[SerializeField]
+        //[Tooltip("A scriptable object which holds a reference to the currently selected character")]
+        //private GameObjectVariable currentlySelectedGameObject;
 
         [Header("Current State")]
         [SerializeField]
@@ -41,15 +41,15 @@ namespace GD.Controllers
         private Animator animator;
         private NavMeshAgent navMeshAgent;
         private IRayProvider rayProvider;
-        private ISelector selector;
+        //private ISelector selector;
         private RaycastHit hitInfo;
-        private bool isSelected;
+        //private bool isSelected;
 
         private void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             rayProvider = GetComponent<IRayProvider>();
-            selector = GetComponent<ISelector>();
+            // selector = GetComponent<ISelector>();
             animator = GetComponent<Animator>();
         }
 
@@ -69,17 +69,21 @@ namespace GD.Controllers
         /// </summary>
         private void ClickDestination()
         {
-            selector.Check(rayProvider.CreateRay());
-            if (selector.GetSelection() != null)
+            rayProvider.CreateRay();
+            if (rayProvider.CreateRay().origin != Vector3.zero)
             {
-                hitInfo = selector.GetHitInfo();
+                if (Physics.Raycast(rayProvider.CreateRay(), out hitInfo))
+                {
+                    SetDestination(hitInfo.point);
+                    SetWaypoint();
+                    //SetSelected(false);
+                    isWalking = true;
+                    animator.SetBool("IsWalking", isWalking);
+                }
 
-                SetDestination(hitInfo.point);
-                SetWaypoint();
-                SetSelected(false);
-                isWalking = true;
-                animator.SetBool("IsWalking", isWalking);
+                
             }
+            
         }
 
         /// <summary>
@@ -105,68 +109,71 @@ namespace GD.Controllers
         /// Set selected and show selection indicator around the player
         /// </summary>
         /// <param name="isSelected"></param>
-        public void SetSelected(bool isSelected)
+        
+   /*     public void SetSelected(bool isSelected)
         {
             this.isSelected = isSelected;
             selectionMarker.SetActive(isSelected);
         }
-
+    
         #endregion Actions -  Set/Clear destination and waypoint
 
         #region NEW INPUT - Selection
-        //
-        // ///// <summary>
-        // ///// Called when a player selects the on-screen player avatar
-        // ///// </summary>
-        // ///// <param name="context"></param>
-        // public void OnSelectPlayer(InputAction.CallbackContext context)
-        // {
-        //     if (context.action.triggered)
-        //     {
-        //         //if player is selected and we click and select a different player
-        //         if (currentlySelectedGameObject.Value != null
-        //             && currentlySelectedGameObject.Value != gameObject)
-        //         {
-        //             //de-select current
-        //             currentlySelectedGameObject.Value = null;
-        //             SetSelected(false);
-        //         }
-        //
-        //         //set selected new player object
-        //         SetSelected(true);
-        //         currentlySelectedGameObject.Value = gameObject;
-        //     }
-        // }
-        //
-        // ///// <summary>
-        // ///// Called when player selects a destination point on the navmesh
-        // ///// </summary>
-        // ///// <param name="context"></param>
-        // public void OnSelectWaypoint(InputAction.CallbackContext context)
-        // {
-        //     //if a player is selected then determine destination
-        //     if (isSelected)
-        //         ClickDestination();
-        // }
-        //
-        // /// <summary>
-        // /// Move selected player towards active destination point
-        // /// </summary>
-        // private void Update()
-        // {
-        //     if (isWalking && Vector3.Distance(navMeshAgent.destination, transform.position)
-        //         <= navMeshAgent.stoppingDistance)
-        //     {
-        //         ClearWaypoint();
-        //         isWalking = false;
-        //         animator.SetBool("IsWalking", isWalking);
-        //     }
-        // }
+       
+         ///// <summary>
+         ///// Called when a player selects the on-screen player avatar
+        ///// </summary>
+         ///// <param name="context"></param>
+         public void OnSelectPlayer(InputAction.CallbackContext context)
+         {
+             if (context.action.triggered)
+            {
+                //if player is selected and we click and select a different player
+                 if (currentlySelectedGameObject.Value != null
+                     && currentlySelectedGameObject.Value != gameObject)
+                 {
+                     //de-select current
+                    currentlySelectedGameObject.Value = null;
+                     SetSelected(false);
+                 }
+       
+                 //set selected new player object
+                 SetSelected(true);
+                 currentlySelectedGameObject.Value = gameObject;
+             }
+         }
+        */
+        
+         ///// <summary>
+         ///// Called when player selects a destination point on the navmesh
+         ///// </summary>
+         ///// <param name="context"></param>
+         public void OnSelectWaypoint(InputAction.CallbackContext context)
+         {
+             //if a player is selected then determine destination
+             //if (isSelected)
+             if (context.action.triggered)
+                 ClickDestination();
+         }
+        
+         /// <summary>
+         /// Move selected player towards active destination point
+         /// </summary>
+         private void Update()
+         {
+             if (isWalking && Vector3.Distance(navMeshAgent.destination, transform.position)
+                 <= navMeshAgent.stoppingDistance)
+             {
+                ClearWaypoint();
+                isWalking = false;
+                 animator.SetBool("IsWalking", isWalking);
+             }
+         }
 
         #endregion NEW INPUT - Selection
 
         #region OLD INPUT - Selection
-
+/*
         private void OnMouseDown()
         {
             if (currentlySelectedGameObject.Value != null
@@ -193,7 +200,7 @@ namespace GD.Controllers
                 animator.SetBool("IsWalking", false);
             }
         }
-
+*/
         #endregion OLD INPUT - Selection
     }
 }
