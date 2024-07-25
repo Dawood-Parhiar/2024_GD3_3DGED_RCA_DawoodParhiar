@@ -2,11 +2,11 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Standard Controls",
+            "name": "Main",
             "id": "defe036b-3e98-4b70-a6dd-510ae7da297d",
             "actions": [
                 {
-                    "name": "SelectWaypoint",
+                    "name": "Move",
                     "type": "Button",
                     "id": "d5084fa9-47ac-44fd-b0e9-679734988b6d",
                     "expectedControlType": "Button",
@@ -19,11 +19,11 @@
                 {
                     "name": "",
                     "id": "08b4bf09-6528-467a-8eda-17191ae476fb",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SelectWaypoint",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

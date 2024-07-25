@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1190043726845699179}
-  - component: {fileID: 1571190380861993430}
   m_Layer: 0
   m_Name: UIRichMultiTextFormat
   m_TagString: Untagged
@@ -32,38 +31,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1571190380861993430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5577621736917375309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09aa9d425b08f7b42a4b2979d313bfcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPosition: {x: 20, y: 20}
-  textOffset: {x: 0, y: 20}
-  prompts:
-  - text: 'Example: <title>'
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 14
-    isBold: 1
-    isItalic: 0
-    dimensions: {x: 0, y: 0}
-  - text: '- Usage: <list keyboard/joystick controls>'
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 12
-    isBold: 0
-    isItalic: 0
-    dimensions: {x: 0, y: 0}
-  - text: '- Keywords: <add class names, keywords>'
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 12
-    isBold: 0
-    isItalic: 0
-    dimensions: {x: 251.00002, y: 15.000001}
-  enableGlobalFontScaling: 0
-  globalScalePercentage: 100
