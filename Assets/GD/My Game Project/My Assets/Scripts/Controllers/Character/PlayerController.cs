@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     float lookRotationSpeed = 8f;
     
+    bool playerBusy = false;
+    //create a target variable to store the target of the player
+    GameObject target;
+    
     void Awake() 
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers)) 
         {
+            target = null;
             agent.destination = hit.point;
             if(clickEffect != null)
             { Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
@@ -65,9 +70,17 @@ public class PlayerController : MonoBehaviour
 
     void FaceTarget()
     {
+        if(agent.destination == transform.position) return;
+        
+           Vector3 facing = Vector3.zero;
+           if(target != null)
+           { facing = target.transform.position; }
+           else
+           { facing = agent.destination; }
+        
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed); 
     }
 
     void SetAnimations()
