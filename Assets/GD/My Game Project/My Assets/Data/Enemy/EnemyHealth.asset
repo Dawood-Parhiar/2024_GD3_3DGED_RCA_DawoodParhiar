@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891baf0ba4c569646a3b1841d4cb922d, type: 3}
-  m_Name: PlayerAttackEvent
+  m_Script: {fileID: 11500000, guid: 08f1a3cda4d494c49a82e865f1ddb361, type: 3}
+  m_Name: EnemyHealth
   m_EditorClassIdentifier: 
-  Name: 
+  currentHealth: 30
+  Name: This event triggers when Enemy Health decreases

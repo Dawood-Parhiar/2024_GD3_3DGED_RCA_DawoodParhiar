@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209d3f117eb8d094eb7e4039dcd517ba, type: 3}
-  m_Name: InteractableObjectData
+  m_Script: {fileID: 11500000, guid: 891baf0ba4c569646a3b1841d4cb922d, type: 3}
+  m_Name: EnemyAttackEvent
   m_EditorClassIdentifier: 
-  Description: 
-  Type: 2
-  icon: {fileID: 0}
-  PickupClip: {fileID: 0}
-  UseClip: {fileID: 0}
-  DropClip: {fileID: 0}
-  LivesForMs: 0
-  RespawnEveryMs: 0
+  Name: This Event triggers when the enemy attacks player

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ba34b96fa30204ab6f48fe20e34035, type: 3}
-  m_Name: CurrentlySelected
+  m_Script: {fileID: 11500000, guid: 08f1a3cda4d494c49a82e865f1ddb361, type: 3}
+  m_Name: PlayerHealth
   m_EditorClassIdentifier: 
-  Description: 
-  Value: {fileID: 0}
+  currentHealth: 100
+  Name: This event triggers when players health decreases
