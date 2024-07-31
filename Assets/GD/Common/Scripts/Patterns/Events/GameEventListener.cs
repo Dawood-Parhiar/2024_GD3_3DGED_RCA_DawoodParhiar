@@ -15,6 +15,12 @@ namespace GD
         [SerializeField]
         private UnityEvent Response;
 
+        private UnityAction action;
+
+        public GameEventListener(UnityAction action)
+        {
+            this.action = action;
+        }
         private void OnEnable()
         {
             Event.RegisterListener(this);

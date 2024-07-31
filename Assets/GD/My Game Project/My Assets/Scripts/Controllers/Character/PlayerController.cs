@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GD;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
@@ -13,9 +14,13 @@ public class PlayerController : MonoBehaviour
     
     const string IDLE = "Idle";
     const string RUN = "Run";
-
+    const string ATTACK = "Attack";
+    
     PlayerInput input;
-
+    
+    [SerializeField]
+    private GameEvent PlayerAttackEvent;
+    
     NavMeshAgent agent;
     Animator animator;
 
@@ -41,7 +46,25 @@ public class PlayerController : MonoBehaviour
     void AssignInputs()
     {
         input.Main.Move.performed += ctx => ClickToMove();
+        input.Main.Attack.performed += ctx => Attack();
         
+    }
+
+    public void Attack()
+    {
+        if (!playerBusy)
+        {
+            playerBusy = true;
+            animator.Play(ATTACK);
+            StartCoroutine(ResetPlayerBusy());
+            PlayerAttackEvent.Raise(); //raise the event to notify the listeners
+        }
+    }
+
+    private IEnumerator ResetPlayerBusy()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        playerBusy = false;
     }
 
     void ClickToMove()
@@ -85,10 +108,15 @@ public class PlayerController : MonoBehaviour
 
     void SetAnimations()
     {
-        if(agent.velocity == Vector3.zero)
-        { animator.Play(IDLE); }
+        
+        if (agent.velocity == Vector3.zero)
+        {
+            animator.Play(IDLE);
+        }
         else
-        { animator.Play(RUN); }
+        {
+            animator.Play(RUN);
+        }
     }
 }
 
