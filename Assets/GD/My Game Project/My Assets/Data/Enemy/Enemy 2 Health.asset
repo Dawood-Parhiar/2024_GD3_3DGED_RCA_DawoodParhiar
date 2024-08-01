@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08f1a3cda4d494c49a82e865f1ddb361, type: 3}
-  m_Name: EnemyHealth
+  m_Name: Enemy 2 Health
   m_EditorClassIdentifier: 
-  currentHealth: 30
-  Name: This event triggers when Enemy Health decreases
+  currentHealth: 100
+  Name: 

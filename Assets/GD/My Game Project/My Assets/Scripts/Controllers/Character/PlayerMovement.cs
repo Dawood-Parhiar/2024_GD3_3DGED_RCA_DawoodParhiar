@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.AI;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     // this script is sourced from https://www.youtube.com/watch?v=LVu3_IVCzys
     // and is used to control the player character using the NavMeshAgent component
@@ -17,18 +17,14 @@ public class PlayerController : MonoBehaviour
     
     const string IDLE = "Idle";
     const string RUN = "Run";
+    const string JUMP = "Jump";
     const string ATTACK = "Attack";
     
     PlayerInput input;
-    [SerializeField]
-    private GameEvent PlayerAttackEvent;
-    
     NavMeshAgent agent;
     Animator animator;
-
-    [Header("Health")]
-    [SerializeField] private Health playerHealth;
-
+    PlayerCombat playerCombat;// Script
+    
     [Header("Movement")]
     [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
@@ -42,34 +38,15 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         input = new PlayerInput();
+        playerCombat = GetComponent<PlayerCombat>();
         AssignInputs();
     }
 
     void AssignInputs()
     {
         input.Main.Move.performed += ctx => ClickToMove();
-        input.Main.Attack.performed += ctx => Attack();
-        
+        input.Main.Attack.performed += ctx => playerCombat.Attack();
     }
-
-    public void Attack()
-    {
-        if (!playerBusy)
-        {
-            playerBusy = true;
-            animator.Play(ATTACK);
-            StartCoroutine(ResetPlayerBusy());
-            PlayerAttackEvent?.Raise(); // null conditional operator to check if the event is null before raising it 
-            Debug.Log("Player attack event raised.");
-        }
-    }
-
-    private IEnumerator ResetPlayerBusy()
-    {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        playerBusy = false;
-    }
-
     void ClickToMove()
     {
         RaycastHit hit;
@@ -81,23 +58,15 @@ public class PlayerController : MonoBehaviour
             { Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
         }
     }
-
     void OnEnable() 
     { input.Enable(); }
-
     void OnDisable() 
     { input.Disable();}
-
     void Update() 
-    {
-        FaceTarget();
-        SetAnimations();
-    }
-
+    { FaceTarget(); SetAnimations(); }
     void FaceTarget()
     {
         if(agent.destination == transform.position) return;
-        
            Vector3 facing = Vector3.zero;
            if(target != null)
            { facing = target.transform.position; }
@@ -109,38 +78,17 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed); 
     }
 
+    private bool IsGrounded()
+    { return Physics.Raycast(transform.position, Vector3.down, 0.2f); }
     void SetAnimations()
     {
-        
-        if (agent.velocity == Vector3.zero)
-        {
-            animator.Play(IDLE);
-        }
+        if (animator.GetBool(ATTACK)) return;//if attacking, don't change animation
+        if(!IsGrounded())
+        { animator.Play(JUMP); }
+        else if (agent.velocity == Vector3.zero)
+        { animator.Play(IDLE); }
         else
-        {
-            animator.Play(RUN);
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        
-        if (playerHealth.currentHealth <= 0)
-        {
-            //Handle player death
-            Destroy(gameObject);
-        }
-    }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        Enemy enemy;
-        if(other.gameObject.CompareTag("Enemy"))
-        {
-            enemy = other.gameObject.GetComponent<Enemy>();
-            enemy.TakeDamage(20);
-        }
-
+        { animator.Play(RUN); }
     }
 }
 

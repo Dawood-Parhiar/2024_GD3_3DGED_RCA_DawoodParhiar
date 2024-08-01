@@ -4,7 +4,7 @@ using GD.My_Game_Project.My_Assets.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform player;
@@ -19,42 +19,43 @@ public class Enemy : MonoBehaviour
     Animator animator;
     const string WALK = "Walk";
     const string ATTACK = "Attack";
+    //const string GotHit = "GotHit";
     
-    [Header("Health")]
-    [SerializeField] private Health enemyHealth;
+    EnemyCombat enemyCombat;
+    // [Header("Health")]
+    // [SerializeField] private Health enemyHealth;
 
     
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = FindObjectOfType<PlayerController>().transform;
+        player = FindObjectOfType<PlayerMovement>().transform;
         animator = GetComponent<Animator>();
+        enemyCombat = GetComponent<EnemyCombat>();
 
     }
     
     
-    public void OnPlayerAttack()
-    {
-        Debug.Log("Enemy attack event received by Enemy.");
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        
-        if (distanceToPlayer <= followRadius)
-        {
-            isFollowingPlayer = true;
-        }
-        
-    }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Enemy collided with player.");
-            PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-            playerController.TakeDamage(10);
-        }
-    }
+    // public void OnPlayerAttack()
+    // {
+    //     Debug.Log("Enemy attack event received by Enemy.");
+    //     float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+    //     if (distanceToPlayer <= followRadius)
+    //     {
+    //         isFollowingPlayer = true;
+    //     }
+    //     
+    // }
+    // public void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         Debug.Log("Enemy collided with player.");
+    //         PlayerCombat playerCombat = other.gameObject.GetComponent<PlayerCombat>();
+    //         playerCombat.TakeDamage(10);
+    //     }
+    // }
 
     // Update is called once per frame
     void Update()
@@ -105,15 +106,16 @@ public class Enemy : MonoBehaviour
        }
    }
     
-    public void TakeDamage(int damage)
-    {
-        enemyHealth.TakeDamage(damage);
-        if (enemyHealth.currentHealth <= 0)
-        {
-            // Handle enemy death
-            Destroy(gameObject);
-        }
-    }
+    // public void TakeDamage(int damage)
+    // {
+    //     enemyHealth.TakeDamage(damage);
+    //     animator.SetBool(GotHit, true);
+    //     if (enemyHealth.currentHealth <= 0)
+    //     {
+    //         // Handle enemy death
+    //         Destroy(gameObject);
+    //     }
+    // }
     
     
 }
