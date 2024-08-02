@@ -1,0 +1,7 @@
+#References
+Treasure https://assetstore.unity.com/packages/3d/environments/fantasy/animated-cartoon-treasure-chest-146757
+Character https://assetstore.unity.com/packages/3d/characters/humanoids/low-poly-fantasy-warrior-127775
+Skeleton Enemies https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-simple-characters-skeleton-free-demo-262897
+Rpg Animations https://assetstore.unity.com/packages/3d/animations/rpg-animations-pack-free-288783
+Walls and Floors https://assetstore.unity.com/packages/3d/environments/historic/walls-and-floors-v-1-144638
+Basic Motions Animations https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271
