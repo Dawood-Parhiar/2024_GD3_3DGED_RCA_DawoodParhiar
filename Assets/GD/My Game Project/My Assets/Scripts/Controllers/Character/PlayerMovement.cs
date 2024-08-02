@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask clickableLayers;
 
     float lookRotationSpeed = 8f;
-    bool playerBusy = false;
     GameObject target;
     
     void Awake() 
@@ -40,7 +39,18 @@ public class PlayerMovement : MonoBehaviour
         input = new PlayerInput();
         playerCombat = GetComponent<PlayerCombat>();
         AssignInputs();
+        LootBox box = FindObjectOfType<LootBox>();
+        if (box) box.OnBoxOpen += GetChestItems;
     }
+
+    private void GetChestItems(GameObject[] obj)
+    {
+        foreach (GameObject item in obj)
+        {
+            Debug.Log("Player got " + item.name);
+        }
+    }
+
 
     void AssignInputs()
     {

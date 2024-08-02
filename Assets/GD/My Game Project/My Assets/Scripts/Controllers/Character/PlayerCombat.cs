@@ -2,12 +2,14 @@ using System.Collections;
 using GD;
 using GD.My_Game_Project.My_Assets.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class PlayerCombat : MonoBehaviour
 {
     const string ATTACK = "Attack";
     const string GOTHIT = "GotHit";
 
-    [SerializeField] private GameEvent PlayerAttackEvent;
+    [FormerlySerializedAs("PlayerAttackEvent")] [SerializeField] private GameEvent playerAttackEvent;
     [SerializeField] private Health playerHealth;
 
     Animator animator;
@@ -27,7 +29,7 @@ public class PlayerCombat : MonoBehaviour
     }
     private IEnumerator PerformAttack()
     {
-        PlayerAttackEvent?.Raise();
+        playerAttackEvent?.Raise();
         Debug.Log("Player attack event raised.");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         animator.SetBool(ATTACK, false);

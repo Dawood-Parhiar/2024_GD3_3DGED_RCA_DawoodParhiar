@@ -7,17 +7,14 @@ using UnityEngine;
 public class EnemyCombat : MonoBehaviour
 {
     const string GotHit = "GotHit";
-
     [Header("Health")]
     [SerializeField] private Health enemyHealth;
-
     Animator animator;
-
+    [SerializeField] private GameEvent enemyAttackEvent;
     void Start()
     {
         animator = GetComponent<Animator>();
     }
-
     public void TakeDamage(int damage)
     {
         enemyHealth.TakeDamage(damage);
@@ -28,12 +25,11 @@ public class EnemyCombat : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Enemy collided with player.");
+            enemyAttackEvent?.Raise();
             PlayerCombat playerCombat = other.gameObject.GetComponent<PlayerCombat>();
             playerCombat.TakeDamage(10);
         }
