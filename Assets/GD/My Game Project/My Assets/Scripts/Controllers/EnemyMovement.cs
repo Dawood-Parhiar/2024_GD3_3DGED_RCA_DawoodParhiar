@@ -1,6 +1,7 @@
 using System;
 using GD;
 using GD.My_Game_Project.My_Assets.Scripts;
+using GD.My_Game_Project.My_Assets.Scripts.Controllers.Character;
 using UnityEngine;
 using UnityEngine.AI;
 

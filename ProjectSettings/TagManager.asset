@@ -8,6 +8,7 @@ TagManager:
   - Interactable
   - Wall
   - Enemy
+  - Consumable
   layers:
   - Default
   - TransparentFX
