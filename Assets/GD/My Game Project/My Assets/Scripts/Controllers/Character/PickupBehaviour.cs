@@ -1,3 +1,4 @@
+using System;
 using GD;
 using GD.My_Game_Project.My_Assets.Scripts.Inventory.Events;
 using UnityEngine;
@@ -9,6 +10,19 @@ public class PickupBehaviour : MonoBehaviour
 
     [SerializeField]
     private string targetTag = "Collectible";
+    
+    [SerializeField]
+    private string targetTag2 = "Chest";
+    
+
+    private void GetChestItems(GameObject[] obj)
+    {
+        foreach (GameObject item in obj)
+        {
+            Debug.Log("Player got " + item.name);
+            
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,9 +41,14 @@ public class PickupBehaviour : MonoBehaviour
 
                 Destroy(other.gameObject, itemDataBehaviour.ItemData.PickupClip.length);
             }
-            else
+        }
+        else if (other.gameObject.tag.Equals(targetTag2))
+        {
+            LootBox box = other.gameObject.GetComponent<LootBox>();
+            if (box != null)
             {
-                Debug.LogWarning("ItemDataBehaviour not found on " + other.gameObject.name);
+                box.Open();
+                box.OnBoxOpen += GetChestItems;
             }
         }
     }

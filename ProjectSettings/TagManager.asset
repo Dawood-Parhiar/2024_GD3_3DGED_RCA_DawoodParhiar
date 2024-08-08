@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Enemy
   - Consumable
+  - Collectible
   layers:
   - Default
   - TransparentFX

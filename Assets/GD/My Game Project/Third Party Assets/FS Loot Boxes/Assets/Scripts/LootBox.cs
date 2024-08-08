@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// The Loot class.
@@ -14,7 +15,7 @@ public class Loot
     /// <summary>
     /// The loot GameObject prefab.
     /// </summary>
-    public GameObject loot;
+    [FormerlySerializedAs("loot")] public ItemData item;
 
     /// <summary>
     /// The loot drop chance. 1 to 100% chance of drop.
@@ -85,6 +86,8 @@ public class LootBox : MonoBehaviour
     /// </summary>
     public event Action <GameObject[]> OnBoxOpen;
 
+    public InventoryManager playerInventoryManager;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -147,7 +150,9 @@ public class LootBox : MonoBehaviour
             if (loot.dropChance >= chance)
             {
                 // Debug.Log("You got " + loot.loot.name);
-                loots.Add(loot.loot);
+                //loots.Add(loot.loot);
+                //playerInventory.Contents.Add(loot.loot, 1);
+                playerInventoryManager.HandleItemPickup(loot.item);
             }
         }
 
