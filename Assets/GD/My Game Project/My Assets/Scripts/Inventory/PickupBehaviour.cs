@@ -8,7 +8,7 @@ public class PickupBehaviour : MonoBehaviour
     private ItemDataGameEvent OnPickup;
 
     [SerializeField]
-    private string targetTag = "Consumable";
+    private string targetTag = "Collectible";
 
     private void OnTriggerEnter(Collider other)
     {
