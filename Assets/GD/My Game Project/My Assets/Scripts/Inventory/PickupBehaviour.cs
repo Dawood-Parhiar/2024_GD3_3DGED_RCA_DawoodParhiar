@@ -1,4 +1,5 @@
 using GD;
+using GD.My_Game_Project.My_Assets.Scripts.Inventory.Events;
 using UnityEngine;
 
 public class PickupBehaviour : MonoBehaviour
@@ -15,15 +16,21 @@ public class PickupBehaviour : MonoBehaviour
         {
             //try to get the data from the pickup
             var itemDataBehaviour = other.gameObject.GetComponent<ItemDataBehaviour>();
+            if (itemDataBehaviour != null)
+            {
+                //raise the event (tell the EventManager that this thing happened)
+                OnPickup?.Raise(itemDataBehaviour.ItemData);
 
-            //raise the event (tell the EventManager that this thing happened)
-            OnPickup?.Raise(itemDataBehaviour.ItemData);
+                //play where item was
+                AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
+                    other.gameObject.transform.position);
 
-            //play where item was
-            AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
-              other.gameObject.transform.position);
-
-            Destroy(other.gameObject, itemDataBehaviour.ItemData.PickupClip.length);
+                Destroy(other.gameObject, itemDataBehaviour.ItemData.PickupClip.length);
+            }
+            else
+            {
+                Debug.LogWarning("ItemDataBehaviour not found on " + other.gameObject.name);
+            }
         }
     }
 }

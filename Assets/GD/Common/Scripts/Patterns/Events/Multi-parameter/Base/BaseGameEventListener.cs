@@ -17,7 +17,14 @@ namespace GD
 
         private void OnEnable()
         {
-            Event.RegisterListener(this);
+            if (Event != null)
+            {
+                Event.RegisterListener(this);
+            }
+            else
+            {
+                Debug.LogWarning("Event is not assigned in " + gameObject.name);
+            }
         }
 
         private void OnDisable()
