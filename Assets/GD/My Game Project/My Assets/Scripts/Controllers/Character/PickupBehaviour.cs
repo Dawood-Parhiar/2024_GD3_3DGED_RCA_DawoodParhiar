@@ -32,14 +32,20 @@ public class PickupBehaviour : MonoBehaviour
             var itemDataBehaviour = other.gameObject.GetComponent<ItemDataBehaviour>();
             if (itemDataBehaviour != null)
             {
-                //raise the event (tell the EventManager that this thing happened)
-                OnPickup?.Raise(itemDataBehaviour.ItemData);
+                if (!itemDataBehaviour.pickedUp)
+                {
+                    //set the item as picked up
+                    itemDataBehaviour.pickedUp = true;
+                    
+                    //raise the event (tell the EventManager that this thing happened)
+                    OnPickup?.Raise(itemDataBehaviour.ItemData);
 
-                //play where item was
-                AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
-                    other.gameObject.transform.position);
+                    //play where item was
+                    AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
+                        other.gameObject.transform.position);
 
-                Destroy(other.gameObject, itemDataBehaviour.ItemData.PickupClip.length);
+                    Destroy(other.gameObject, itemDataBehaviour.ItemData.PickupClip.length);
+                }
             }
         }
         else if (other.gameObject.tag.Equals(targetTag2))
