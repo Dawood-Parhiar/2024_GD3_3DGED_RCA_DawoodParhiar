@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f1a3cda4d494c49a82e865f1ddb361, type: 3}
   m_Name: Enemy 1 Health
   m_EditorClassIdentifier: 
-  currentHealth: 30
+  maxHealth: 100
+  currentHealth: 100
+  healthBar: {fileID: 0}
   Name: This event triggers when Enemy Health decreases

@@ -7,6 +7,14 @@ using TMPro;
 
 public class ItemSlot : MonoBehaviour
 {
+    
+    /*
+     
+    Reference
+    The Inventory System - Unity Tutorial
+    https://www.youtube.com/watch?v=HInkDgCaf1w&list=PLSR2vNOypvs6eIxvTu-rYjw2Eyw57nZrU&index=4
+    
+    */
     //======ItemData======//
     
     public ItemData itemData;

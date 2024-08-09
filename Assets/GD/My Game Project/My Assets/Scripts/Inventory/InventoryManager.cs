@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     
     public ItemSlot[] itemSlot;
     
+    public int maxValue = 10;//Max value of item in slot
     private void Update()
     {
         //Toggle Inventory Menu
@@ -57,7 +58,7 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (ItemSlot slot in itemSlot)
         {
-            if (slot.isFull && slot.itemData == itemData)
+            if (slot.isFull && slot.itemData == itemData && slot.itemData.Value < maxValue)
             {
                 slot.UpdateQuantity(slot.itemData.Value + 1);
                 return;

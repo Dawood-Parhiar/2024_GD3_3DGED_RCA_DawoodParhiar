@@ -30,7 +30,6 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator PerformAttack()
     {
         playerAttackEvent?.Raise();
-        Debug.Log("Player attack event raised.");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         animator.SetBool(ATTACK, false);
         playerBusy = false;
@@ -43,15 +42,6 @@ public class PlayerCombat : MonoBehaviour
         {
             // Handle player death
             Destroy(gameObject);
-        }
-    }
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            EnemyCombat enemyCombat = other.gameObject.GetComponent<EnemyCombat>();
-            
-            enemyCombat.TakeDamage(20);
         }
     }
 }
