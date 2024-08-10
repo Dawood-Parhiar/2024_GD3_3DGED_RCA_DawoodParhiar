@@ -29,6 +29,7 @@ public class ItemSlot : MonoBehaviour
     
     public void AddItem(ItemData newItem)
     {
+        //Add item to the inventory slot
         itemData = newItem;
         itemImage.sprite = itemData.WaypointIcon;
         itemImage.enabled = true;
@@ -40,6 +41,7 @@ public class ItemSlot : MonoBehaviour
     
     public void UpdateQuantity(int newQuantity)
     {
+        //Update the quantity of the item if it is already in the inventory
         itemData.Value = newQuantity;
         quantityText.text = itemData.Value.ToString();
     }

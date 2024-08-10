@@ -62,11 +62,7 @@ public class EnemyMovement : MonoBehaviour
     }
     void SetAnimations()
    {
-       if (isFollowingPlayer)
-       {
-           animator.Play(ATTACK);
-       }
-       else if (agent.velocity != Vector3.zero)
+       if (agent.velocity != Vector3.zero)
        {
            animator.Play(WALK);
        }
