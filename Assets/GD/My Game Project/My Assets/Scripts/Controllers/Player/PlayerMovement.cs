@@ -13,7 +13,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         const string IDLE = "Idle";
         const string RUN = "Run";
         const string JUMP = "Jump";
-        const string ATTACK = "Attack";
+        
     
         PlayerInput input;
         NavMeshAgent agent;
@@ -51,6 +51,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         {
             input.Main.Move.performed += ctx => ClickToMove();
             input.Main.Attack.performed += ctx => playerCombat.Attack();
+            input.Main.StrongAttack.performed += ctx => playerCombat.StrongAttack();
         }
         void ClickToMove()
         {
@@ -87,10 +88,10 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         { return Physics.Raycast(transform.position, Vector3.down, 0.2f); }
         void SetAnimations()
         {
-            if(!playerCombat.playerBusy)   
+            if(!playerCombat.isAttacking)   
             {
                 if(!IsGrounded())
-                { animator.Play(JUMP); }
+                { animator.SetTrigger(JUMP); }
                 else if (agent.velocity == Vector3.zero)
                 { animator.Play(IDLE); }
                 else

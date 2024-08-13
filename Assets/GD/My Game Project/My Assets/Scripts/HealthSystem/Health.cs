@@ -9,29 +9,36 @@ namespace GD.My_Game_Project.My_Assets.Scripts
     {
         public int maxHealth = 100;
         public int currentHealth = 100;
-        public Slider healthBar;
+        //public Slider healthBar;
         
-        [SerializeField]
-        [Header("Descriptive Information (optional)")]
-        [ContextMenuItem("Reset Name", "ResetName")]
-        private string Name;
+        
+        public void Initialize()
+        {
+            currentHealth = maxHealth;
+        }
+        
         public void TakeDamage(int damage)
         {
             currentHealth -= damage;
-            if (currentHealth < 0) currentHealth = 0;
-            UpdateHealthBar();
+            if (currentHealth < 0)
+            {
+                currentHealth = 0;
+                Die();
+            }
         }
-
-        private void UpdateHealthBar()
-        {
-            if (healthBar != null) healthBar.value = currentHealth;
-        }
-
         public void Heal(int amount)
         {
             currentHealth += amount;
-            if (currentHealth > maxHealth) currentHealth = maxHealth;
-            UpdateHealthBar();
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+        }
+
+        void Die()
+        {
+            // Handle the death of the player
+            Debug.Log("Dead");
         }
     }
 }

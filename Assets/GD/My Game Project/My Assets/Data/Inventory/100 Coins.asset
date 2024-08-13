@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: 100 Coins
   itemPrefab: {fileID: 0}
   Value: 100
-  PickupClip: {fileID: 0}
+  PickupClip: {fileID: 8300000, guid: adcac75087a17704ca6c0c3b15bc3aa5, type: 3}
   WaypointIcon: {fileID: 21300000, guid: b59fab5f25dad7a48b131e3d6d7ec96c, type: 3}

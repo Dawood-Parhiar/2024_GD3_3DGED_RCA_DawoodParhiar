@@ -5,3 +5,7 @@
 #Rpg Animations https://assetstore.unity.com/packages/3d/animations/rpg-animations-pack-free-288783
 #Walls and Floors https://assetstore.unity.com/packages/3d/environments/historic/walls-and-floors-v-1-144638
 #Basic Motions Animations https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271
+
+Background Music https://soundcloud.com/7obu/casanova?in=7obu/sets/sugar-full-album
+
+Mixamo Animations https://www.mixamo.com/#/?genres=Combat&page=1&query=axe&type=Motion%2CMotionPack

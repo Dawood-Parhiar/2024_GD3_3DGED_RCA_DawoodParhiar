@@ -13,12 +13,12 @@ public class EnemyMovement : MonoBehaviour
     public Transform[] patrolPoints;
     private int currentPatrolPoint = 0;
     public float followRadius = 5f;
-    private bool isFollowingPlayer = false;
+    public bool isFollowingPlayer = false;
     [Header("Animations")]
-    Animator animator;
-    const string WALK = "Walk";
+    private Animator animator;
+    const string WALK = "Walking";
     const string ATTACK = "Attack";
-    EnemyCombat enemyCombat;
+    public EnemyCombat enemyCombat;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -39,32 +39,35 @@ public class EnemyMovement : MonoBehaviour
         if (distanceToPlayer <= followRadius)
         {
             isFollowingPlayer = true;
-            
-        }
-        else if (distanceToPlayer > followRadius && isFollowingPlayer)
-        {
-            isFollowingPlayer = false;
-            agent.SetDestination(patrolPoints[currentPatrolPoint].position);
-        }
-
-        if (!isFollowingPlayer)
-        {
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            {
-                currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
-                agent.SetDestination(patrolPoints[currentPatrolPoint].position);
-            }
+            agent.SetDestination(player.position);
         }
         else
         {
-            agent.SetDestination(player.position);
+            if (isFollowingPlayer)
+            {
+                isFollowingPlayer = false;
+                goToNextPatrolPoint();
+            }
+
+            if (!agent.pathPending && agent.remainingDistance < 0.5)
+            {
+                goToNextPatrolPoint();
+            }
         }
     }
+
+    private void goToNextPatrolPoint()
+    {
+        if (patrolPoints.Length == 0) return;
+        // Set the agent to go to the next patrol point
+        agent.destination = patrolPoints[currentPatrolPoint].position;
+        currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
+    }
+
     void SetAnimations()
    {
-       if (agent.velocity != Vector3.zero)
-       {
-           animator.Play(WALK);
-       }
+       // Check if the enemy is walking
+       bool isWalking = agent.velocity != Vector3.zero;
+         animator.SetBool(WALK, isWalking);
    }
 }
