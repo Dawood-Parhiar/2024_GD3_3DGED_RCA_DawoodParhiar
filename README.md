@@ -9,3 +9,6 @@
 Background Music https://soundcloud.com/7obu/casanova?in=7obu/sets/sugar-full-album
 
 Mixamo Animations https://www.mixamo.com/#/?genres=Combat&page=1&query=axe&type=Motion%2CMotionPack
+
+#Sound https://freesound.org/search/?q=steps&f=grouping_pack%3A%2225849_Footsteps+-+Tiles%22
+Steps, Hurt, Hit.

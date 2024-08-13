@@ -18,13 +18,13 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
     const string WALK = "Walking";
     const string ATTACK = "Attack";
-    public EnemyCombat enemyCombat;
+    
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = FindObjectOfType<PlayerMovement>().transform;
         animator = GetComponent<Animator>();
-        enemyCombat = GetComponent<EnemyCombat>();
+        
     }
     // Update is called once per frame
     void Update()

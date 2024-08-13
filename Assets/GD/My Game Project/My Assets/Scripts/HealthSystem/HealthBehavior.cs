@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GD.My_Game_Project.My_Assets.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +8,15 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
     {
         public Health healthData;
         public Slider healthBar;
-        Animator animator;
-        private GameObject gameOverText;
-        const string Hurt = "GotHit";
-        const string Dead = "Dead";
+        private Animator animator;
+        private static readonly int Hurt = Animator.StringToHash("GotHit");
+        private static readonly int Dead = Animator.StringToHash("Dead");
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
         }
+
         private void Start()
         {
             healthData.Initialize();
@@ -23,20 +24,18 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
             healthBar.value = healthData.currentHealth;
         }
 
-        void Update()
+        private void Update()
         {
             healthBar.value = healthData.currentHealth;
         }
-        
+
         public void TakeDamage(int damage)
         {
             healthData.TakeDamage(damage);
             healthBar.value = healthData.currentHealth;
-            animator.SetTrigger("GotHit");
-            
+            animator.SetTrigger(Hurt);
             if (healthData.currentHealth <= 0)
             {
-                // Handle player death
                 Die();
             }
         }
@@ -44,11 +43,34 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
         private void Die()
         {
             animator.SetTrigger(Dead);
-            Time.timeScale = 0;
-            if (gameOverText != null)
+
+            if (gameObject.CompareTag("Player"))
             {
-                gameOverText.SetActive(true);
+                HandlePlayerDeath();
             }
+            else if (gameObject.CompareTag("Enemy"))
+            {
+                HandleEnemyDeath();
+            }
+        }
+
+        private void HandlePlayerDeath()
+        {
+            CountdownTimer countdownTimer = FindObjectOfType<CountdownTimer>();
+            if (countdownTimer != null)
+            {
+                countdownTimer.gameOverText.SetActive(true);
+            }
+            Time.timeScale = 0;
+            gameObject.SetActive(false); // Deactivate player
+        }
+
+        private void HandleEnemyDeath()
+        {
+            // Additional logic for enemy death, e.g., dropping loot, updating score, etc.
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+            Debug.Log("Enemy has been defeated.");
         }
 
         public void Heal(int amount)
@@ -57,5 +79,4 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
             healthBar.value = healthData.currentHealth;
         }
     }
-
 }

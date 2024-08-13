@@ -95,13 +95,14 @@
 using System.Collections;
 using GD;
 using GD.My_Game_Project.My_Assets.Scripts;
+using GD.My_Game_Project.My_Assets.Scripts.HealthSystem;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
     Animator animator;
     public bool isAttacking = false;
-    
+    private HealthBehavior health;
     [SerializeField] private float damageAfterTime;
     [SerializeField] private float strongDamageAfterTime;
     [SerializeField] private int damage;
@@ -111,6 +112,7 @@ public class PlayerCombat : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+        health = GetComponent<HealthBehavior>();
     }
 
     public void Attack()

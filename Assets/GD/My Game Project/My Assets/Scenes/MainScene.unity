@@ -2824,7 +2824,7 @@ MonoBehaviour:
   timerText: {fileID: 273615272}
   gameOverText: {fileID: 370224224}
   countdownTime: 150
-  restartButton: {fileID: 0}
+  restartButton: {fileID: 465425953}
 --- !u!1 &83543909
 GameObject:
   m_ObjectHideFlags: 0
@@ -28448,12 +28448,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackArea: {fileID: 1752849565}
   attackPoint: {fileID: 450320747}
-  attackRange: 1
+  attackRange: 0.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDamage: 20
-  attackCooldown: 1
+  attackDamage: 5
+  attackCooldown: 2
   enemyAttackEvent: {fileID: 11400000, guid: 20cc0c5f691fc83448fe304944a72eca, type: 2}
 --- !u!114 &677415173
 MonoBehaviour:
@@ -28472,7 +28472,6 @@ MonoBehaviour:
   - {fileID: 1418204451}
   followRadius: 7
   isFollowingPlayer: 0
-  enemyCombat: {fileID: 0}
 --- !u!195 &677415174
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -28544,8 +28543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c43cb98868455ebd1a15f231860f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
-  enemyAttackEvent: {fileID: 0}
+  enemyHealth: {fileID: 11400000, guid: 516021a648f14e44192a32d7d112f09f, type: 2}
+  enemyAttackEvent: {fileID: 11400000, guid: 20cc0c5f691fc83448fe304944a72eca, type: 2}
 --- !u!1001 &685315258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37189,7 +37188,7 @@ GameObject:
   - component: {fileID: 904798551}
   - component: {fileID: 904798550}
   - component: {fileID: 904798549}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43502,7 +43501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134697853}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47663,7 +47662,6 @@ MonoBehaviour:
   - {fileID: 2048438578}
   followRadius: 5
   isFollowingPlayer: 0
-  enemyCombat: {fileID: 0}
 --- !u!195 &1224743351
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -47723,11 +47721,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackArea: {fileID: 1087179858}
   attackPoint: {fileID: 77549185}
-  attackRange: 1
+  attackRange: 0.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDamage: 20
+  attackDamage: 5
   attackCooldown: 1
   enemyAttackEvent: {fileID: 11400000, guid: 9afa551e64186894c83a06b50ddbde36, type: 2}
 --- !u!114 &1224743357

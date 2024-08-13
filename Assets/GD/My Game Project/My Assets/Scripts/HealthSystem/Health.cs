@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace GD.My_Game_Project.My_Assets.Scripts
 {
@@ -9,23 +7,21 @@ namespace GD.My_Game_Project.My_Assets.Scripts
     {
         public int maxHealth = 100;
         public int currentHealth = 100;
-        //public Slider healthBar;
-        
-        
+
         public void Initialize()
         {
             currentHealth = maxHealth;
         }
-        
+
         public void TakeDamage(int damage)
         {
             currentHealth -= damage;
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                Die();
             }
         }
+
         public void Heal(int amount)
         {
             currentHealth += amount;
@@ -33,12 +29,6 @@ namespace GD.My_Game_Project.My_Assets.Scripts
             {
                 currentHealth = maxHealth;
             }
-        }
-
-        void Die()
-        {
-            // Handle the death of the player
-            Debug.Log("Dead");
         }
     }
 }

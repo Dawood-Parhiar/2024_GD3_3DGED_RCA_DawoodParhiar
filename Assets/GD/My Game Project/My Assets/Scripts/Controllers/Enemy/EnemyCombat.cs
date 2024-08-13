@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using GD;
 using GD.My_Game_Project.My_Assets.Scripts;
 using GD.My_Game_Project.My_Assets.Scripts.HealthSystem;
@@ -6,8 +7,11 @@ using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
 {
-    Animator animator;
-
+    
+    private Animator animator;
+    private PlayerCombat playerCombat;
+    const string ATTACK = "Attack";
+    
     [Header("Attack")] 
     [SerializeField] 
     private AttackArea attackArea; 
@@ -27,6 +31,8 @@ public class EnemyCombat : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         enemyMovement = GetComponent<EnemyMovement>();
+        
+
     }
 
     private void Update()
@@ -45,48 +51,23 @@ public class EnemyCombat : MonoBehaviour
 
     void Attack(Collider[] hitPlayers)
     {   // Play the attack animation
-        animator.SetTrigger("Attack");
+        animator.Play(ATTACK);
         StartCoroutine(PerformAttack(hitPlayers));
     }
-
-    // private IEnumerator PerformAttack(Collider[] hitPlayers)
-    // {   // Wait for the attack animation to finish
-    //     yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-    //     foreach (Collider player in hitPlayers)
-    //     {
-    //         enemyAttackEvent?.Raise();
-    //         player.GetComponent<HealthBehavior>().TakeDamage(attackDamage);
-    //     }
-    // }
+    
     private IEnumerator PerformAttack(Collider[] hitPlayers)
     {
+        
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-        if (hitPlayers == null || hitPlayers.Length == 0)
-        {
-            Debug.LogError("hitPlayers is null or empty!");
-            yield break;
-        }
-
         foreach (Collider player in hitPlayers)
         {
-            if (player == null)
-            {
-                Debug.LogError("Player collider is null!");
-                continue;
-            }
-
             var healthComponent = player.GetComponent<HealthBehavior>();
-            if (healthComponent == null)
-            {
-                Debug.LogError("Health component not found on player!");
-                continue;
-            }
-
             enemyAttackEvent?.Raise();
             healthComponent.TakeDamage(attackDamage);
         }
     }
+
+
 
     private void OnDrawGizmosSelected()
     {   // Draw the attack range in the editor
