@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
-using GD.My_Game_Project.My_Assets.Scripts.Audio;
 
-public class AudioManagerInitializer : MonoBehaviour
+namespace GD.My_Game_Project.My_Assets.Scripts.Audio
 {
-    [SerializeField] private AudioManager audioManager;
-
-    void Start()
+    public class AudioManagerInitializer : MonoBehaviour
     {
-        if (audioManager != null)
-        {
-            audioManager.Initialize(gameObject);
-            audioManager.PlayBackgroundMusic();
-        }
+        [SerializeField] private AudioManager audioManager;
+
+        // void Start()
+        // {
+        //     if (audioManager != null)
+        //     {
+        //         audioManager.Initialize(gameObject);
+        //         audioManager.PlayBackgroundMusic();
+        //     }
+        // }
     }
 }

@@ -23,8 +23,8 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Audio
         {
             if (backgroundMusicClip != null && backgroundMusicSource != null)
             {
-                backgroundMusicSource.clip = backgroundMusicClip;
-                backgroundMusicSource.Play();
+                    backgroundMusicSource.clip = backgroundMusicClip;
+                    backgroundMusicSource.Play();
             }
         }
     }

@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
 {
-    public class HealthBehavior : MonoBehaviour
+    public class EnemyHealthBehavior : MonoBehaviour
     {
-        public Health healthData;
+        public EnemyHealth healthData;
         public Slider healthBar;
         private Animator animator;
         private static readonly int Hurt = Animator.StringToHash("GotHit");
@@ -36,43 +36,13 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
             animator.SetTrigger(Hurt);
             if (healthData.currentHealth <= 0)
             {
-                Die();
+                animator.SetTrigger(Dead);
+                Debug.Log("Enemy has health zero.");
             }
         }
 
-        private void Die()
-        {
-            animator.SetTrigger(Dead);
-
-            if (gameObject.CompareTag("Player"))
-            {
-                HandlePlayerDeath();
-            }
-            else if (gameObject.CompareTag("Enemy"))
-            {
-                HandleEnemyDeath();
-            }
-        }
-
-        private void HandlePlayerDeath()
-        {
-            CountdownTimer countdownTimer = FindObjectOfType<CountdownTimer>();
-            if (countdownTimer != null)
-            {
-                countdownTimer.gameOverText.SetActive(true);
-            }
-            Time.timeScale = 0;
-            gameObject.SetActive(false); // Deactivate player
-        }
-
-        private void HandleEnemyDeath()
-        {
-            // Additional logic for enemy death, e.g., dropping loot, updating score, etc.
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-            Debug.Log("Enemy has been defeated.");
-        }
-
+        
+        
         public void Heal(int amount)
         {
             healthData.Heal(amount);

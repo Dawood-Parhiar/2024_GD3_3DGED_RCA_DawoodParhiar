@@ -61,7 +61,7 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         foreach (Collider player in hitPlayers)
         {
-            var healthComponent = player.GetComponent<HealthBehavior>();
+            var healthComponent = player.GetComponent<PlayerHealthBehavior>();
             enemyAttackEvent?.Raise();
             healthComponent.TakeDamage(attackDamage);
         }

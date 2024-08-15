@@ -7,7 +7,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Enemy
     public class HurtEnemy : MonoBehaviour, IDamagable
     {
         [Header("Health")]
-        [SerializeField] private Health enemyHealth;
+        [SerializeField] private EnemyHealth enemyHealth;
         [SerializeField] private GameEvent enemyAttackEvent;
         
         Animator animator;

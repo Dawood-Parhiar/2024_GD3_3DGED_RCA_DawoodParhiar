@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,10 +24,12 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         [Header("Movement")]
         [SerializeField] ParticleSystem clickEffect;
         [SerializeField] LayerMask clickableLayers;
-
+        
         float lookRotationSpeed = 8f;
         GameObject target;
-    
+        
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
         void Awake() 
         {
             agent = GetComponent<NavMeshAgent>();
@@ -68,20 +71,53 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         { input.Enable(); }
         void OnDisable() 
         { input.Disable();}
-        void Update() 
-        { FaceTarget(); SetAnimations(); }
+
+        void Update()
+        {
+            FaceTarget(); SetAnimations(); PlayFootsteps();
+            
+        }
+
+        private void PlayFootsteps()
+        {
+            if (agent.velocity != Vector3.zero)
+            { PlayWalkingSound(); }
+            else
+            { StopWalkingSound(); }
+        }
+
+        private void StopWalkingSound()
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+
+        private void PlayWalkingSound()
+        {
+            if (!audioSource.isPlaying )
+            {
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        }
+
         void FaceTarget()
         {
+            // If the agent is not moving, return
             if(agent.destination == transform.position) return;
+            // If the target is null, set the target to the agent's destination
             Vector3 facing = Vector3.zero;
             if(target != null)
             { facing = target.transform.position; }
             else
             { facing = agent.destination; }
-        
+            
             Vector3 direction = (agent.destination - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed); 
+            
         }
 
         private bool IsGrounded()
@@ -93,9 +129,13 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
                 if(!IsGrounded())
                 { animator.SetTrigger(JUMP); }
                 else if (agent.velocity == Vector3.zero)
-                { animator.Play(IDLE); }
+                {
+                    animator.Play(IDLE);
+                }
                 else
-                { animator.Play(RUN); }
+                {
+                    animator.Play(RUN);
+                }
             }
         }
     }

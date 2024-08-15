@@ -45,14 +45,23 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
         public void Die()
         {
             animator.SetBool(Dead, true);
-            Time.timeScale = 0;
+          
+            
+            StartCoroutine("WaitForDeath");
             CountdownTimer countdownTimer = FindObjectOfType<CountdownTimer>();
             countdownTimer.gameOverText.SetActive(true);
         }
-        
+
+        private IEnumerator WaitForDeath()
+        {
+            yield return new WaitForSeconds(2);
+            Time.timeScale = 0;
+        }
+
 
         public void Heal(int amount)
         {
+            Debug.Log("Healing player");
             healthData.Heal(amount);
             healthBar.value = healthData.currentHealth;
         }

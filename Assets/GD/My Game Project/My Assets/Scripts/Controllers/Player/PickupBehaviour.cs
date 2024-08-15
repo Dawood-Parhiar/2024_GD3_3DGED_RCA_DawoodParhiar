@@ -1,5 +1,6 @@
 using System;
 using GD;
+using GD.My_Game_Project.My_Assets.Scripts.HealthSystem;
 using GD.My_Game_Project.My_Assets.Scripts.Inventory.Events;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class PickupBehaviour : MonoBehaviour
     [SerializeField]
     private string targetTag2 = "Chest";
     
+    [SerializeField]
+    private string consumable = "Consumable";
 
     private void GetChestItems(GameObject[] obj)
     {
@@ -26,11 +29,12 @@ public class PickupBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        var itemDataBehaviour = other.gameObject.GetComponent<ItemDataBehaviour>();
+
         if (other.gameObject.tag.Equals(targetTag))
         {
             //try to get the data from the pickup
-            var itemDataBehaviour = other.gameObject.GetComponent<ItemDataBehaviour>();
-            if (itemDataBehaviour != null)
+              if (itemDataBehaviour != null)
             {
                 if (!itemDataBehaviour.pickedUp)
                 {
@@ -44,7 +48,7 @@ public class PickupBehaviour : MonoBehaviour
                     AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
                         other.gameObject.transform.position);
 
-                    Destroy(other.gameObject, itemDataBehaviour.ItemData.PickupClip.length);
+                    Destroy(other.gameObject);
                 }
             }
         }
@@ -57,27 +61,18 @@ public class PickupBehaviour : MonoBehaviour
                 box.OnBoxOpen += GetChestItems;
             }
         }
-    }
-}
-
-/*
- public class PickupBehaviour : MonoBehaviour
-{
-    [SerializeField]
-    private StringGameEvent OnPickup;
-
-    [SerializeField]
-    private string targetTag = "Consumable";
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag.Equals(targetTag))
+        else if (other.gameObject.tag.Equals(consumable))
         {
-            OnPickup.Raise("ammo");
+            itemDataBehaviour.pickedUp = true;
+            OnPickup.Raise(itemDataBehaviour.ItemData);
             Destroy(other.gameObject);
-            //PlaySound()
+
+            // Increase player's health
+            var playerHealth = FindObjectOfType<PlayerHealthBehavior>();
+            if (playerHealth != null)
+            {
+                playerHealth.Heal(50);
+            }
         }
     }
 }
-
- */
