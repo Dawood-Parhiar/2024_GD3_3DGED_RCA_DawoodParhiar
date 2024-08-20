@@ -71,7 +71,7 @@ public class PickupBehaviour : MonoBehaviour
             var playerHealth = FindObjectOfType<PlayerHealthBehavior>();
             if (playerHealth != null)
             {
-                playerHealth.Heal(50);
+                playerHealth.Heal(itemDataBehaviour.ItemData.Value);
             }
         }
     }

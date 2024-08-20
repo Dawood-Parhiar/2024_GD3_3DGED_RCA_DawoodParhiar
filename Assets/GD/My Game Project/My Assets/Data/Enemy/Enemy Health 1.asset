@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Enemy Health 1
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
   character: {fileID: 0}

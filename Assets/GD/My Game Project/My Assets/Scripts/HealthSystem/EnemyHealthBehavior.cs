@@ -38,10 +38,9 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
             {
                 animator.SetTrigger(Dead);
                 Debug.Log("Enemy has health zero.");
+                gameObject.SetActive(false);
             }
         }
-
-        
         
         public void Heal(int amount)
         {

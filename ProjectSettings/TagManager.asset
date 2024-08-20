@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Consumable
   - Collectible
+  - UI
   layers:
   - Default
   - TransparentFX

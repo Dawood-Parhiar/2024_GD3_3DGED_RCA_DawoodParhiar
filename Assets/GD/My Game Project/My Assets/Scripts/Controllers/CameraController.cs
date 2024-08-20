@@ -4,18 +4,23 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers
 {
     public class CameraController : MonoBehaviour
     {
-        public Transform target;
+        public Transform player; // Assign the player transform in the Inspector
+        public float rotationSpeed = 5.0f;
 
-        public float smoothSpeed = 8f;
-        public Vector3 offset;
-
-        void Update()
+        private void Update()
         {
-            if(target == null) return;
-
-            Vector3 desiredPosition = new Vector3(target.position.x + offset.x, target.position.y + offset.y, target.position.z + offset.z);
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
-            transform.position = smoothedPosition;
+            if (Input.GetKey(KeyCode.A))
+            {
+                RotateAroundPlayer(-1);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                RotateAroundPlayer(1);
+            }
+        }
+        private void RotateAroundPlayer(int direction)
+        {
+            transform.RotateAround(player.position, Vector3.up, direction * rotationSpeed * Time.deltaTime);
         }
     }
 }

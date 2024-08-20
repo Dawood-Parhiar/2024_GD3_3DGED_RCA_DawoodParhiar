@@ -9,12 +9,11 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Managers
         public static GameManager Instance { get; private set; }
 
         [Header("Player")]
-        [SerializeField] private GameObject playerPrefab;
+        //[SerializeField] private GameObject playerPrefab;
         private GameObject playerInstance;
 
         [Header("Audio")]
         [SerializeField] private AudioManager audioManager;
-        [SerializeField] private GameObject audioSourceHolder;
 
         private enum GameState { Start, Playing, Paused, GameOver }
         private GameState currentState;
@@ -37,23 +36,22 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Managers
         private void InitializeGame()
         {
             currentState = GameState.Start;
-            SpawnPlayer();
+            //SpawnPlayer();
             InitializeAudio();
         }
 
-        private void SpawnPlayer()
-        {
-            if (playerPrefab != null)
-            {
-                playerInstance = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            }
-        }
+        // private void SpawnPlayer()
+        // {
+        //     if (playerPrefab != null)
+        //     {
+        //         playerInstance = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        //     }
+        // }
 
         private void InitializeAudio()
         {
-            if (audioManager != null && audioSourceHolder != null)
+            if (audioManager != null)
             {
-                audioManager.Initialize(audioSourceHolder);
                 audioManager.PlayBackgroundMusic();
             }
         }
@@ -61,9 +59,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Managers
         public void StartGame()
         {
             currentState = GameState.Playing;
-            // Additional start game logic
-            
-            
+            // Additional start game logic like showing UI
         }
 
         public void PauseGame()
