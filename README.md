@@ -32,3 +32,5 @@ https://assetstore.unity.com/packages/2d/gui/icons/magic-potion-1-69874
 #Food https://assetstore.unity.com/packages/3d/props/food/simple-foods-207032
 
 #Background image https://ideogram.ai/g/hQEvQiqXQEGhxqzhwuizww/2
+
+#Trophy https://assetstore.unity.com/packages/3d/props/trophy-cups-chalices-free-188059

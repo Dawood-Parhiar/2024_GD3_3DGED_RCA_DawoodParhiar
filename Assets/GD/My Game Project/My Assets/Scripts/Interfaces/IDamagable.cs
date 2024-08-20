@@ -1,4 +1,4 @@
-﻿namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Interfaces
+﻿namespace GD.My_Game_Project.My_Assets.Scripts.Interfaces
 {
     public interface IDamagable
     {

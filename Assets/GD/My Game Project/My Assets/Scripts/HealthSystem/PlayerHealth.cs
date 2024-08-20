@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GD.My_Game_Project.My_Assets.Scripts
 {
     [CreateAssetMenu(fileName = "Health", menuName = "My Scriptable Objects/Player Health", order = 1)]
-    public class Health : ScriptableObject
+    public class PlayerHealth : ScriptableObject
     {
         public int maxHealth = 100;
         public int currentHealth = 100;

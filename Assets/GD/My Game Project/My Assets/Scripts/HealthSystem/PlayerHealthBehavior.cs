@@ -9,7 +9,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
 {
     public class PlayerHealthBehavior : MonoBehaviour
     {
-        public Health healthData;
+        public PlayerHealth healthData;
         public Slider healthBar;
         Animator animator;
         const string Hurt = "GotHit";
@@ -34,10 +34,11 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
         {
             healthData.TakeDamage(damage);
             healthBar.value = healthData.currentHealth;
-            animator.SetTrigger(Hurt);
+            animator.SetBool(Hurt, true);
             if (healthData.currentHealth <= 0)
             {
                 // Handle player death
+                animator.SetBool(Dead, true);
                 Die();
             }
         }

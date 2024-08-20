@@ -1,5 +1,6 @@
 ﻿using System;
-using GD.My_Game_Project.My_Assets.Scripts.Controllers.Interfaces;
+using GD.My_Game_Project.My_Assets.Scripts.HealthSystem;
+using GD.My_Game_Project.My_Assets.Scripts.Interfaces;
 using UnityEngine;
 
 namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Enemy
@@ -10,9 +11,12 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Enemy
         [SerializeField] private EnemyHealth enemyHealth;
         [SerializeField] private GameEvent enemyAttackEvent;
         
+        [Header("Hurt Sound")]
+        [SerializeField] private AudioSource audioSource;
+        
         Animator animator;
-        const string Hurt = "GotHit";
-        const string isDead = "isDead";
+        const string GotHit = "GotHit";
+        
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -21,9 +25,9 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Enemy
         public void Damage(int damageAmount)
         {
             //Debug.Log("Enemy has been damaged for " + damageAmount + " damage.");
-            animator.SetTrigger("GotHit");
             enemyHealth.TakeDamage(damageAmount);
-            animator.SetBool(Hurt, true);
+            animator.SetBool(GotHit, true);
+            audioSource.Play();
         }
     }
 }

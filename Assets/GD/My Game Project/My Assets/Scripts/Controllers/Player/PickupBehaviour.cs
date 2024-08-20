@@ -17,7 +17,7 @@ public class PickupBehaviour : MonoBehaviour
     
     [SerializeField]
     private string consumable = "Consumable";
-
+    
     private void GetChestItems(GameObject[] obj)
     {
         foreach (GameObject item in obj)
@@ -60,6 +60,12 @@ public class PickupBehaviour : MonoBehaviour
                 box.Open();
                 box.OnBoxOpen += GetChestItems;
             }
+            itemDataBehaviour.pickedUp = true;
+            OnPickup.Raise(itemDataBehaviour.ItemData);
+            AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
+                other.gameObject.transform.position);
+            Destroy(other.gameObject);
+            
         }
         else if (other.gameObject.tag.Equals(consumable))
         {
@@ -74,5 +80,6 @@ public class PickupBehaviour : MonoBehaviour
                 playerHealth.Heal(itemDataBehaviour.ItemData.Value);
             }
         }
+        
     }
 }

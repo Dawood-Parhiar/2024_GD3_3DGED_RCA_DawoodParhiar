@@ -11,6 +11,8 @@ TagManager:
   - Consumable
   - Collectible
   - UI
+  - Chest
+  - Trophy
   layers:
   - Default
   - TransparentFX

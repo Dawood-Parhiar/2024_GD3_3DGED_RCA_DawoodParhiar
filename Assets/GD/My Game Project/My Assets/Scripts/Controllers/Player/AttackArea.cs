@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using GD.My_Game_Project.My_Assets.Scripts.Controllers.Interfaces;
+using GD.My_Game_Project.My_Assets.Scripts.Interfaces;
 using UnityEngine;
 
 public class AttackArea : MonoBehaviour

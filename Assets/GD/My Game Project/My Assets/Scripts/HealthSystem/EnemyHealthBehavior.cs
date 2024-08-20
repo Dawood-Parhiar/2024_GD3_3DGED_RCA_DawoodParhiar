@@ -1,5 +1,4 @@
-﻿using GD.My_Game_Project.My_Assets.Scripts.UI;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
@@ -10,7 +9,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
         public Slider healthBar;
         private Animator animator;
         private static readonly int Hurt = Animator.StringToHash("GotHit");
-        private static readonly int Dead = Animator.StringToHash("Dead");
+        private static readonly int IsDead = Animator.StringToHash("IsDead");
 
         private void Awake()
         {
@@ -36,8 +35,9 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
             animator.SetTrigger(Hurt);
             if (healthData.currentHealth <= 0)
             {
-                animator.SetTrigger(Dead);
+                animator.SetTrigger(IsDead);
                 Debug.Log("Enemy has health zero.");
+                animator.SetBool(IsDead, true);
                 gameObject.SetActive(false);
             }
         }
