@@ -13,6 +13,7 @@ TagManager:
   - UI
   - Chest
   - Trophy
+  - Camera Zone
   layers:
   - Default
   - TransparentFX

@@ -9,7 +9,7 @@ namespace GD
     //See C# Generics - https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/
 
     /// <summary>
-    /// Parent class for all singletons (SelectionManager, InventoryManager, GameManager)
+    /// Parent class for all singletons (SelectionManager, InventoryManager, _GameManager)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <see cref="https://refactoring.guru/design-patterns/singleton"/>

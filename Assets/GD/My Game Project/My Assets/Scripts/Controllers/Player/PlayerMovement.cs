@@ -30,6 +30,9 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         
         [Header("Audio")]
         [SerializeField] private AudioSource audioSource;
+        
+        [Header("Camera")]
+        [SerializeField] private UnityEngine.Camera mainCamera;
         void Awake() 
         {
             agent = GetComponent<NavMeshAgent>();
@@ -38,7 +41,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
             playerCombat = GetComponent<PlayerCombat>();
             AssignInputs();
             LootBox box = FindObjectOfType<LootBox>();
-            if (box) box.OnBoxOpen += GetChestItems;
+            mainCamera = UnityEngine.Camera.main;
         }
 
         private void GetChestItems(GameObject[] obj)
@@ -59,7 +62,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         void ClickToMove()
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers)) 
+            if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers)) 
             {
                 target = null;
                 agent.destination = hit.point;

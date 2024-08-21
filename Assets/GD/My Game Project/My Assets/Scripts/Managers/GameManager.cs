@@ -12,6 +12,11 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Managers
         //[SerializeField] private GameObject playerPrefab;
         private GameObject playerInstance;
 
+        [Header("UI")]
+        [SerializeField] private GameObject gameOverText;
+
+        [SerializeField] private GameObject mainMenu;
+        
         [Header("Audio")]
         [SerializeField] private AudioManager audioManager;
 
@@ -31,6 +36,8 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Managers
             }
 
             InitializeGame();
+            gameOverText.SetActive(false);
+            mainMenu.SetActive(true);
         }
 
         private void InitializeGame()
@@ -79,6 +86,8 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Managers
         public void GameOver()
         {
             currentState = GameState.GameOver;
+            Time.timeScale = 0;
+            gameOverText.SetActive(true);
             // Additional game over logic
         }
 

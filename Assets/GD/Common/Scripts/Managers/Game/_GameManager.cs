@@ -6,7 +6,7 @@ namespace GD
     /// <summary>
     /// Manage
     /// </summary>
-    public class GameManager : MonoBehaviour
+    public class _GameManager : MonoBehaviour
     {
         #region Fields
 

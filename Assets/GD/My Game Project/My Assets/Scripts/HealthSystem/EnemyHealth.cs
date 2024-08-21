@@ -13,7 +13,6 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
         {
             currentHealth = maxHealth;
         }
-
         public void TakeDamage(int damage)
         {
             currentHealth -= damage;
