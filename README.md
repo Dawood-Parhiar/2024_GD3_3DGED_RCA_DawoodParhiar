@@ -36,3 +36,11 @@ https://assetstore.unity.com/packages/2d/gui/icons/magic-potion-1-69874
 #Trophy https://assetstore.unity.com/packages/3d/props/trophy-cups-chalices-free-188059
 
 #Eating Sound https://freesound.org/people/ProductionNow/sounds/234237/
+
+#cheese Image https://www.hiclipart.com/free-transparent-background-png-clipart-isdzb/download
+
+#fish Image
+https://www.cleanpng.com/png-fish-cartoon-cuisine-fish-food-7481343/
+
+#steak Image
+https://www.freepik.com/vectors/beef-steak-illustration

@@ -10,7 +10,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Camera
          * Script Reference: https://www.youtube.com/watch?v=X_vK66w3GJk
          */
        [SerializeField]
-        private string triggerTag;
+        private string triggerTag = "Camera Zone";
     
         public CinemachineVirtualCamera primaryCamera;
         public CinemachineVirtualCamera[] vcams;

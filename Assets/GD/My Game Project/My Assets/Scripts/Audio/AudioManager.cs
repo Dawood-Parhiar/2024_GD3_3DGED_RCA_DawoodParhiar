@@ -6,15 +6,15 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Audio
     [CreateAssetMenu(fileName = "AudioManager", menuName = "My Scriptable Objects/AudioManager", order = 1)]
     public class AudioManager : ScriptableObject
     {
+        [Header("Audio Mixer")]
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioMixerGroup backgroundMusicGroup;
         [SerializeField] private AudioClip backgroundMusicClip;
+        [SerializeField] private AudioSource backgroundMusicSource;
 
-        private AudioSource backgroundMusicSource;
-
-        public void Initialize(GameObject audioSourceHolder)
+        public void Initialize()
         {
-            backgroundMusicSource = audioSourceHolder.AddComponent<AudioSource>();
+            //backgroundMusicSource = audioSourceHolder.AddComponent<AudioSource>();
             backgroundMusicSource.outputAudioMixerGroup = backgroundMusicGroup;
             backgroundMusicSource.loop = true;
         }
@@ -24,7 +24,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Audio
             if (backgroundMusicClip != null && backgroundMusicSource != null)
             {
                     backgroundMusicSource.clip = backgroundMusicClip;
-                    backgroundMusicSource.Play();
+                    backgroundMusicSource.enabled = true;
             }
         }
     }

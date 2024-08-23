@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: Cheese
   itemPrefab: {fileID: 0}
   Value: 30
-  PickupClip: {fileID: 0}
-  WaypointIcon: {fileID: 0}
+  PickupClip: {fileID: 8300000, guid: 4c6be1f2277d0ef45ba6a2de023c7c43, type: 3}
+  WaypointIcon: {fileID: 21300000, guid: 726c393fd176ce146a18bd4104a8e1ec, type: 3}

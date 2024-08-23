@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: Whole Bird to Eat
   itemPrefab: {fileID: 0}
   Value: 60
-  PickupClip: {fileID: 8300000, guid: fe3018dbfd00f04429fa5b0feab4ac61, type: 3}
+  PickupClip: {fileID: 8300000, guid: 4c6be1f2277d0ef45ba6a2de023c7c43, type: 3}
   WaypointIcon: {fileID: 21300000, guid: eb942591d1f6b974cbf1aaef0d7c4395, type: 3}

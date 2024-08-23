@@ -57,7 +57,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.Controllers.Character
         {
             input.Main.Move.performed += ctx => ClickToMove();
             input.Main.Attack.performed += ctx => playerCombat.Attack();
-            input.Main.StrongAttack.performed += ctx => playerCombat.StrongAttack();
+            //input.Main.StrongAttack.performed += ctx => playerCombat.StrongAttack();
         }
         void ClickToMove()
         {

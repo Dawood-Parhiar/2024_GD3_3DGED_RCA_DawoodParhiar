@@ -5,21 +5,11 @@ using UnityEngine;
 
 public class TrophyPickup : MonoBehaviour
 {
-    [SerializeField] private GameObject winningText;
-    [SerializeField] private AudioSource audioSource;
-    
-    void Start()
-    {
-        winningText.gameObject.SetActive(false); // Hide the prompt initially
-    }
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            winningText.gameObject.SetActive(true);
-            GameManager.Instance.GameOver();
-            audioSource.Play();
+            GameManager.Instance.GameWon();
         }
     }
 }

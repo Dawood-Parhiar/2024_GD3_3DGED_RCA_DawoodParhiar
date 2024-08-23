@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 /// <summary>
@@ -16,11 +15,12 @@ public class InventoryManager : MonoBehaviour
     
     public ItemSlot[] itemSlot;
     
-    public int maxValue = 30;//Max value of item in slot
+    public int maxValue = 20;//Max value of item in slot
+    
     private void Update()
     {
         //Toggle Inventory Menu
-        if (Input.GetButtonDown("Inventory")&& menuActivated)
+        if (Input.GetButtonDown("Inventory")&& menuActivated) 
         {
             Time.timeScale = 1;
             inventoryMenu.SetActive(false);
@@ -32,9 +32,7 @@ public class InventoryManager : MonoBehaviour
             inventoryMenu.SetActive(true);
             menuActivated = true;
         }
-       
     }
-
     public void HandleItemPickup(ItemData data)
     {
         //if we have this item then count++
@@ -57,7 +55,7 @@ public class InventoryManager : MonoBehaviour
     public void AddItemToInventory(ItemData itemData)
     {
         foreach (ItemSlot slot in itemSlot)
-        {
+        {//if slot is full and item is the same then update quantity
             if (slot.isFull && slot.itemData == itemData && slot.itemData.Value < maxValue)
             {
                 slot.UpdateQuantity(slot.itemData.Value + 1);

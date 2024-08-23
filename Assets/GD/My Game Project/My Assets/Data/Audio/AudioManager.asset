@@ -16,3 +16,4 @@ MonoBehaviour:
   backgroundMusicGroup: {fileID: 7630956117329917954, guid: e47245157a079884e80df4946f7cdb9f,
     type: 2}
   backgroundMusicClip: {fileID: 8300000, guid: 8997af6218468894587c6a9f1a0c5255, type: 3}
+  backgroundMusicSource: {fileID: 0}

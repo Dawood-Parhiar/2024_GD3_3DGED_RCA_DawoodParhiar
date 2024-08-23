@@ -1,3 +1,4 @@
+using GD.My_Game_Project.My_Assets.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,22 +19,23 @@ namespace GD.My_Game_Project.My_Assets.Scripts.UI
         
         void Update()
         {
-            if (countdownTime > 0)
-            {
-                countdownTime -= Time.deltaTime;
-                int minutes = Mathf.FloorToInt(countdownTime / 60);
-                int seconds = Mathf.FloorToInt(countdownTime % 60);
-                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            }
-            else
-            {
-                Managers.GameManager.Instance.GameOver(); // Stop the game
-            }
+           if(countdownTime > 0)
+           {
+               countdownTime -= Time.deltaTime;
+               int minutes = Mathf.FloorToInt(countdownTime / 60);
+               int seconds = Mathf.FloorToInt(countdownTime % 60);
+               timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+           }
+           else
+           {
+               GameManager.Instance.GameOver(); // Stop the game
+                timerText.text = "00:00";
+           }
         }
         public void OnRestartButtonClick()
         {
             //Application reload
-            Managers.GameManager.Instance.RestartLevel();
+            GameManager.Instance.RestartLevel();
         }
     
     }

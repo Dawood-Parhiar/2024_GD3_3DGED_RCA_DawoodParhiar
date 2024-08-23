@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     Animator animator;
+    [Header("Attack")]
     public bool isAttacking = false;
     private EnemyHealthBehavior enemyHealth;
     [SerializeField] private float damageAfterTime;
@@ -19,26 +20,26 @@ public class PlayerCombat : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         enemyHealth = GetComponent<EnemyHealthBehavior>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void Attack()
     {
+        
         if (isAttacking) return;
         animator.SetTrigger("SimpleAttack");
         StartCoroutine(nameof(Hit), false);
     }
 
-    public void StrongAttack()
-    {
-        if (isAttacking) return;
-        animator.SetTrigger("StrongAttack");
-        PlayAttackSound();
-        StartCoroutine(nameof(Hit), true);
-    }
+    // public void StrongAttack()
+    // {
+    //     if (isAttacking) return;
+    //     animator.SetTrigger("StrongAttack");
+    //     StartCoroutine(nameof(Hit), true);
+    // }
 
     private IEnumerator Hit(bool strong)
     {
+        PlayAttackSound();
         isAttacking = true;
         playerAttackEvent?.Raise();
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
@@ -56,7 +57,8 @@ public class PlayerCombat : MonoBehaviour
     {
         if (audioSource)
         {
-            audioSource.Play();
+            //audioSource.PlayClipAtPoint(audioSource.clip, transform.position);
+            audioSource.PlayOneShot(audioSource.clip);
         }
     }
 }

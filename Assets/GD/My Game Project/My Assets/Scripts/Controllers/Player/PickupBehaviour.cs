@@ -26,7 +26,6 @@ public class PickupBehaviour : MonoBehaviour
             
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         var itemDataBehaviour = other.gameObject.GetComponent<ItemDataBehaviour>();
@@ -38,16 +37,11 @@ public class PickupBehaviour : MonoBehaviour
             {
                 if (!itemDataBehaviour.pickedUp)
                 {
-                    //set the item as picked up
                     itemDataBehaviour.pickedUp = true;
-                    
                     //raise the event (tell the EventManager that this thing happened)
                     OnPickup?.Raise(itemDataBehaviour.ItemData);
-
                     //play where item was
-                    AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
-                        other.gameObject.transform.position);
-
+                    PlayPickupClip(other, itemDataBehaviour);
                     Destroy(other.gameObject);
                 }
             }
@@ -59,18 +53,20 @@ public class PickupBehaviour : MonoBehaviour
             {
                 box.Open();
                 box.OnBoxOpen += GetChestItems;
+                if (box.isOpen)
+                {
+                    itemDataBehaviour.pickedUp = true;
+                    OnPickup.Raise(itemDataBehaviour.ItemData);
+                    PlayPickupClip(other, itemDataBehaviour);
+                    Destroy(other.gameObject);
+                }
             }
-            itemDataBehaviour.pickedUp = true;
-            OnPickup.Raise(itemDataBehaviour.ItemData);
-            AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
-                other.gameObject.transform.position);
-            Destroy(other.gameObject);
-            
         }
         else if (other.gameObject.tag.Equals(consumable))
         {
             itemDataBehaviour.pickedUp = true;
             OnPickup.Raise(itemDataBehaviour.ItemData);
+            PlayPickupClip(other, itemDataBehaviour);
             Destroy(other.gameObject);
 
             // Increase player's health
@@ -81,5 +77,11 @@ public class PickupBehaviour : MonoBehaviour
             }
         }
         
+    }
+
+    private static void PlayPickupClip(Collider other, ItemDataBehaviour itemDataBehaviour)
+    {
+        AudioSource.PlayClipAtPoint(itemDataBehaviour.ItemData.PickupClip,
+            other.gameObject.transform.position);
     }
 }

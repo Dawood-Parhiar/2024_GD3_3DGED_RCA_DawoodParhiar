@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using GD.My_Game_Project.My_Assets.Scripts.UI;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
 {
     public class PlayerHealthBehavior : MonoBehaviour
     {
+        [Header("Health")]
         public PlayerHealth healthData;
         public Slider healthBar;
         Animator animator;
-        const string Hurt = "GotHit";
+        const string GotHit = "GotHit";
         const string Dead = "Dead";
         private void Awake()
         {
@@ -34,7 +31,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
         {
             healthData.TakeDamage(damage);
             healthBar.value = healthData.currentHealth;
-            animator.SetBool(Hurt, true);
+            animator.SetBool(GotHit, true);
             if (healthData.currentHealth <= 0)
             {
                 // Handle player death
@@ -43,7 +40,7 @@ namespace GD.My_Game_Project.My_Assets.Scripts.HealthSystem
             }
         }
 
-        public void Die()
+        private void Die()
         {
             animator.SetBool(Dead, true);
             Managers.GameManager.Instance.GameOver();
