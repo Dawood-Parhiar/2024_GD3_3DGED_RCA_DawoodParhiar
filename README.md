@@ -1,3 +1,9 @@
+#Repository Link
+https://github.com/Dawood-Parhiar/2024_GD3_3DGED_RCA_DawoodParhiar
+
+#Youtube Screencast video
+https://youtu.be/utgFmQcdoTE
+
 #References
 
 #Treasure https://assetstore.unity.com/packages/3d/environments/fantasy/animated-cartoon-treasure-chest-146757

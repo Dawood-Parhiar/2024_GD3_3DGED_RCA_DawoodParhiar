@@ -24,7 +24,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void Attack()
     {
-        
         if (isAttacking) return;
         animator.SetTrigger("SimpleAttack");
         StartCoroutine(nameof(Hit), false);
